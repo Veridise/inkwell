@@ -8,7 +8,6 @@ use std::fmt::{self, Display};
 use crate::basic_block::BasicBlock;
 use crate::values::traits::AsValueRef;
 use crate::values::{BasicValue, BasicValueEnum, InstructionOpcode, InstructionValue, Value};
-use crate::values::AnyValueEnum;
 
 use super::AnyValue;
 
@@ -29,7 +28,7 @@ impl<'ctx> PhiValue<'ctx> {
         }
     }
 
-    pub fn add_incoming_as_enum(self, incoming: &[(AnyValueEnum<'ctx>, BasicBlock<'ctx>)]) {
+    pub fn add_incoming_as_enum(self, incoming: &[(BasicValueEnum<'ctx>, BasicBlock<'ctx>)]) {
         let (mut values, mut basic_blocks): (Vec<LLVMValueRef>, Vec<LLVMBasicBlockRef>) = {
             incoming
                 .iter()
